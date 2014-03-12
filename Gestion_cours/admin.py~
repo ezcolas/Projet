@@ -1,0 +1,5 @@
+from django.contrib import admin
+from Gestion_cours.models import *
+
+admin.site.register(Professeur)
+admin.site.register(cour)
