@@ -5,9 +5,9 @@ from django.db import models
 """Table professeur"""
 
 class Professeur(models.Model):
-    code=models.CharField(max_length=10)
-    TITRE = (('M', 'Masculin'), ('F', 'Feminin'))
-    titre = models.CharField(max_length=1, choices = TITRE)
+    #code=models.CharField(max_length=10)
+    #TITRE = (('Mr', 'Mr'), ('Mme', 'Mme'))
+    titre = models.CharField(max_length=3, choices = TITRE)
     Nom = models.CharField(max_length=25)
     Prenom = models.CharField(max_length=25)
     Matiere_enseigne = models.CharField(max_length=25)
@@ -16,12 +16,14 @@ class Professeur(models.Model):
     #FileField.upload_to
 
     def __unicode__(self):
-        return self.prenom
+        return self.Prenom
 
 """Etablissement"""
 class Etablissement(models.Model):
     Description = models.CharField(max_length=250)
     Abreviation = models.CharField(max_length=5)
+    def __unicode__(self):
+        return self.Abreviation
     
 """Table des cours"""
 class cour(models.Model):
