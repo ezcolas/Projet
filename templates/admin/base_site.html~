@@ -4,7 +4,7 @@
 {% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name">{% trans 'ESIH Gestion de Cours a' %}</h1>
+<h1 id="site-name">{% trans 'ESIH Gestion de Cours' %}</h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

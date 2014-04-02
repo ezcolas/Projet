@@ -1,12 +1,29 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import RedirectView
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
+#from Gestion_cours.views import index, home, coursapp, rapportapp, profapp, institutionapp
 admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'ProjetPython.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+   #url(r'^$', RedirectView.as_view(url='admin/')),
+    #(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'Gestion_cours/base.html'}),
 
+    url(r'^$', RedirectView.as_view(url='admin/')),
     url(r'^admin/', include(admin.site.urls)),
+
+    #url(r'^$', index.as_view(), name='base'),
+    #url(r'^$/', include(admin.site.urls)),
+    #url(r'^accueil/$', home.as_view(), name='accueil'),
+    #url(r'^cours/$', coursapp.as_view(), name = 'cours'),
+    #url(r'^rapport/$', rapportapp.as_view(), name = 'rapport'),
+    #url(r'^institution/$', institutionapp.as_view(), name = 'institution'),
+    #url(r'^professeur/$', profapp.as_view(), name = 'professeur')
+   
+
 )
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

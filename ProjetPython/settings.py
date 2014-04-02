@@ -59,7 +59,7 @@ WSGI_APPLICATION = 'ProjetPython.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbesih',
+        'NAME': 'esihdb',
         'USER': 'admin',
         'PASSWORD': 'admin',
         'HOST': '127.0.0.1',
@@ -84,7 +84,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+STATICFILES_DIRS = (
+    '/home/colas/ProjetPyhon/static',
+)
 STATIC_URL = '/static/'
+
+
+#STATIC_URL = '/static/'
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 # Parse database configuration from $DATABASE_URL
@@ -106,4 +112,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-

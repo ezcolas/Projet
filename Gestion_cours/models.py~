@@ -1,26 +1,32 @@
 import datetime
 from django.utils import timezone
 from django.db import models
+from django.contrib.auth.models import User
 
 """Table professeur"""
 
 class Professeur(models.Model):
-    code=models.CharField(max_length=10)
-    TITRE = (('Mr', 'Mr'), ('Mme', 'Mme'))
+    user = models.OneToOneField(User)
+    code=models.CharField(max_length=5)
+    TITRE = (('Mr', 'Monsieur'), ('Mme', 'Madame'))
     titre = models.CharField(max_length=3, choices = TITRE)
-    Nom = models.CharField(max_length=25)
-    Prenom = models.CharField(max_length=25)
-    Matiere_enseigne = models.CharField(max_length=25)
+    Nom = models.CharField(max_length=50)
+    Domaine = models.CharField(max_length=25)
+    GRADE = (('Dr', 'Doctorat'), ('Mtre', 'Maitrise'), ('BS', 'Licence'))
+    Niveau = models.CharField(max_length=5, choices = GRADE)    
+    email= models.EmailField()
     phone= models.CharField(max_length=15)   
-    cv = models.FileField(upload_to='.')
+    cv = models.FileField(upload_to="cv/")
 
     def __unicode__(self):
-        return '%s-%s'%(self.Prenom, self.Nom)
+        return '%s'%( self.Nom)
 
 """Etablissement"""
 class Etablissement(models.Model):
     Description = models.CharField(max_length=250)
     Abreviation = models.CharField(max_length=5)
+    Adresse = models.CharField(max_length=25)
+    Website = models.CharField(max_length=25)
     def __unicode__(self):
         return self.Abreviation
     
@@ -34,7 +40,7 @@ class cour(models.Model):
     semestre= models.CharField(max_length=2, choices = SEMESTRE)   
     
     def __unicode__(self):
-        return '%s-%s%s-%s' %(self.etablissement,self.grade, self.semestre,self.titre)
+        return '%s-%s%s-%s' %(self.Etablissement,self.grade, self.semestre,self.titre)
 
 """ Table Cours Specialise"""
 class cours_specialise(models.Model):
@@ -59,16 +65,16 @@ class description_cour(models.Model):
     cour = models.ForeignKey(cour)
     titre = models.CharField(max_length=25)
     credit = models.CharField(max_length=15)
-    lieu_enseignement = models.CharField(max_length=50)
+    lieu = models.ForeignKey(Etablissement)
     Professeur = models.ForeignKey(Professeur)
     public_cible = models.CharField(max_length=50)
     prerequis = models.CharField(max_length=50)
-    objectif = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
-    plan_cours =models.CharField(max_length=50)
+    objectif = models.TextField(null=True)
+    description = models.TextField(null=True)
+    plan_cours =models.TextField(null=True)
     format_cours = models.CharField(max_length=50)
-    ressource = models.CharField(max_length=50)
-    evaluation = models.CharField(max_length=50)
+    ressource = models.TextField(null=True)
+    evaluation = models.TextField(null=True)
 
 
 # Create your models here.

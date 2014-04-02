@@ -2,8 +2,25 @@ from django.contrib import admin
 from Gestion_cours.models import *
 
 
-admin.site.register(Professeur)
-admin.site.register(Etablissement)
+
+class ProfesseurAdmin(admin.ModelAdmin):
+    list_display = ('titre', 'Nom', 'Niveau','Domaine', 'email', 'phone')
+
+
+    
+    search_fieds =('Domaine', 'Nom')
+
+class EtablissementAdmin(admin.ModelAdmin):
+    list_display = ('Abreviation', 'Description', 'Adresse', 'Website')
+
+
+class DescriptionAdmin(admin.ModelAdmin):
+    list_display = ('cour', 'titre', 'credit', 'lieu', 'Professeur', 'public_cible', 'prerequis', 'objectif', 'description', 'plan_cours', 'format_cours', 'ressource', 'evaluation')
+
+
+
+admin.site.register(Professeur, ProfesseurAdmin)
+admin.site.register(Etablissement, EtablissementAdmin)
 admin.site.register(cour)
 admin.site.register(cours_specialise)
-admin.site.register(description_cour)
+admin.site.register(description_cour, DescriptionAdmin)
